@@ -1,0 +1,32 @@
+    {% load static %}
+    <!-- HOME -->
+	<div id="home">
+		<!-- container -->
+		<div class="container">
+			<!-- home wrap -->
+			<div class="home-wrap">
+				<!-- home slick -->
+				<div id="home-slick">
+					
+					<!-- banner -->
+					{% for p in product_slider %}
+						
+					<div class="banner banner-1">
+						<img src="{{ p.image.url }}" alt="">
+						<div class="banner-caption text-center">
+							<h1>{{p.title}}</h1>
+							<h3 class="white-color font-weak">৳ {{ p.price }}</h3>
+							<a href="{% url 'store' %}" class="primary-btn">Shop Now</a>
+						</div>
+					</div>
+					{% endfor %}
+					<!-- /banner -->
+
+				</div>
+				<!-- /home slick -->
+			</div>
+			<!-- /home wrap -->
+		</div>
+		<!-- /container -->
+	</div>
+	<!-- /HOME -->

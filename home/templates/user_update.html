@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+
+{% block slider %}
+    {% include 'slider.html' %}
+{% endblock %}
+
+{% block content %} 
+
+    <!-- BREADCRUMB -->
+    <div id="breadcrumb">
+        <div class="container">
+            <ul class="breadcrumb">
+                <li><a href="/">Home</a></li>
+                <li class="active">User Profile Update</li>
+            </ul>
+        </div>
+    </div>
+    <!-- /BREADCRUMB -->
+
+    <!-- section -->
+    <div class="section">
+        <!-- container -->
+        <div class="container">
+            <!-- row -->
+            <div class="row">
+
+                <div class="col-md-3">
+                    {% include "user_panel.html" %}
+                </div>
+
+                <div class="col-md-9">
+                    <div class="billing-details">
+                        <div class="section-title">
+                            <h3 class="title">User Profile Update</h3>
+                        </div>
+                    </div>
+                        {% if messages %}
+                        {% for message in messages %}
+                            <div class="alert alert-{{message.tags}}" id="msg" role="alert">
+                                {{ message }}
+                            </div>
+                        {% endfor %}
+                        {% endif %}
+                        <form method="POST" action="{% url 'user_update' %}" enctype = "multipart/form-data">
+                            {% csrf_token %}
+                           <div class="form-group">
+                                <input class="input" required type="text" name="name" placeholder="Name" value="{{ profile.name }}">
+                            </div>
+                            <div class="form-group">
+                                <input class="input" required type="text" name="phone" placeholder="Phone" value="{{ profile.phone }}">
+                            </div>
+                            <div class="form-group">
+                                <input class="input" required type="text" name="address" placeholder="Address" value="{{ profile.address }}">
+                            </div>
+                            <div class="form-group">
+                                <input class="input" required type="text" name="city" placeholder="City" value="{{ profile.city }}">
+                            </div>
+                            <div class="form-group">
+                                <input class="input" required type="text" name="country" placeholder="Country" value="{{ profile.country }}">
+                            </div>
+                            <div class="form-group">
+                                <label for="pic">Chose your profile picture</label>
+                                <input type="file" class="form-control-file" id="pic" required name="photo">
+                            </div>
+                            <button class="btn btn-success" type="submit" value="user_creat"> Update</button>
+                        </form>
+
+                </div>
+            </div>
+            <!-- /row -->
+        </div>
+        <!-- /container -->
+    </div>
+    <!-- /section -->
+
+{% endblock %}
+
+
+{% block jquery %}	
+    <script>
+        setTimeout(function(){
+            if ($("#msg").length > 0){
+                $("#msg").remove();
+            }
+        },2000)
+    </script>
+{% endblock %}

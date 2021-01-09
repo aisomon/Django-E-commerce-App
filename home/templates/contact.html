@@ -1,0 +1,113 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+    
+    
+<!-- BREADCRUMB -->
+<div id="breadcrumb">
+    <div class="container">
+        <ul class="breadcrumb">
+            <li><a href="{% url 'home' %}">Home</a></li>
+            <li class="active">Contact Us</li>
+        </ul>
+    </div>
+</div>
+<!-- /BREADCRUMB -->
+<div class="section">
+    <!-- container -->
+    <div class="container">
+        <!-- row -->
+        <div class="row">
+
+            <div class="col-md-6">
+                <div class="billing-details">
+
+                    <div class="section-title">
+                        <h3 class="title text-center">Get In Touch</h3>
+                    </div>
+
+                    {% if messages %}
+                        {% for message in messages %}
+                            <div class="alert alert-{{message.tags}}" id="msg" role="alert">
+                                {{ message }}
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+
+                    <form id="message_submit" action="" method="POST">
+                        {% csrf_token %}
+                       <div class="form-group">
+                            <input class="input" id="name" required type="text" name="name" placeholder="Name">
+                        </div>
+                        <div class="form-group">
+                            <input class="input" id="email" required type="email" name="email" placeholder="Email">
+                        </div>
+                        <div class="form-group">
+                            <textarea class="form-control rounded-0" id="message" name="message" rows="10"></textarea>
+                        </div>
+                        </div>
+                        <button class="btn btn-success" type="submit" id="btn_submit_permision"><i class="fa fa-send"></i>  Send </button>
+                    </form>
+
+                </div>
+            </div>
+
+        </div>
+        <!-- /row -->
+    </div>
+    <!-- /container -->
+</div>
+<!-- /section -->
+{% endblock %}
+
+
+{% block jquery %}		
+		<!-- Sending message using Ajax -->
+		<script>
+			$(document).ready(function(){
+				$("#message_submit").submit(function(e){
+					e.preventDefault(); // default action is off by this line
+					var fullName = $("#name").val()
+					var email = $("#email").val()
+					var message = $("#message").val()
+					var csrftoken = $("[name=csrfmiddlewaretoken]").val();
+		
+					our_data_json = {
+						"fullName":fullName,
+						"email":email,
+						"message":message,
+					}
+					$.ajax({
+						type:"POST",
+						url:"{% url 'contact' %}",
+						headers:{
+							"X-CSRFToken":csrftoken
+						},
+						data:our_data_json,
+						dataType:"json",
+						success:function(data){
+							if (data.msg === "Success"){
+								alert("Form is submitted!")
+							}
+							$('#name').val(''); // remove the value from the input
+							$('#email').val('');
+							$('#message').val('');
+							console.log(data); // log the returned json to the console
+							console.log("success"); // another sanity check
+						}
+					});
+		
+		
+				});
+			});
+        
+            setTimeout(function(){
+                if ($("#msg").length > 0){
+                    $("#msg").remove();
+                }
+            },3000)
+		</script>
+{% endblock %}
+    

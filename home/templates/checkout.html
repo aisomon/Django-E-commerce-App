@@ -1,0 +1,98 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+    <!-- BREADCRUMB -->
+	<div id="breadcrumb">
+		<div class="container">
+			<ul class="breadcrumb">
+				<li><a href="{% url 'home' %}">Home</a></li>
+				<li class="active">Checkout</li>
+			</ul>
+		</div>
+	</div>
+	<!-- /BREADCRUMB -->
+
+	<!-- section -->
+	<div class="section">
+		<!-- container -->
+		<div class="container">
+			<!-- row -->
+			<div class="row">
+				<form id="checkout-form" class="clearfix" action="" method="POST">
+					{% csrf_token %}
+					<div class="col-md-6">
+						<div class="billing-details">
+							<div class="section-title">
+								<h3 class="title">Billing Details</h3>
+							</div>
+							<div class="form-group">
+								<input class="input" type="text" required name="name" placeholder="Full Name">
+							</div>
+							<div class="form-group">
+								<input class="input" type="text" required name="address" placeholder="Address">
+							</div>
+							<div class="form-group">
+								<input class="input" type="text" required name="city" placeholder="City">
+							</div>
+							<div class="form-group">
+								<input class="input" type="text" required name="country" placeholder="Country">
+							</div>
+							<div class="form-group">
+								<input class="input" type="tel" required name="tel" placeholder="Telephone">
+							</div>
+						</div>
+					</div>
+
+					<div class="col-md-6">
+						<div class="payments-methods">
+							<div class="section-title">
+								<h4 class="title">Payments Methods</h4>
+							</div>
+							<div class="input-checkbox">
+								<input type="radio" name="payments" id="payments-1" checked>
+								<label for="payments-1">Direct Bank Transfer</label>
+								<div class="caption">
+									<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+										<p>
+								</div>
+							</div>
+							<div class="input-checkbox">
+								<input type="radio" name="payments" id="payments-2">
+								<label for="payments-2">Cheque Payment</label>
+								<div class="caption">
+									<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+										<p>
+								</div>
+							</div>
+							<div class="input-checkbox">
+								<input type="radio" name="payments" id="payments-3">
+								<label for="payments-3">Paypal System</label>
+								<div class="caption">
+									<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+										<p>
+								</div>
+							</div>
+							<div class="section-title">
+								<h3 class="title">Total Amount </h3>
+							</div>
+							<div class="caption">
+								<h4> <strong> ৳ {{ total }}</strong></h4>
+							</div>
+						</div>
+					</div>
+					<div class="pull-right">
+						<button type="submit" class="primary-btn">Confirm Order</button>
+					  </div>
+				</form>
+				
+			</div>
+			<!-- /row -->
+		</div>
+		<!-- /container -->
+	</div>
+	<!-- /section -->
+{% endblock %}
+    
+

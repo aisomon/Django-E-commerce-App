@@ -1,0 +1,93 @@
+{% extends 'base.html' %}
+
+{% load static %}
+{% block search %}
+	<form class="form-inline" action="" method="GET">
+		<input class="form-control mr-sm-2" type="search" name="q" placeholder=" &#xF002; Search" style="font-family:Arial, FontAwesome" value="{{ request.GET.q }}">
+  	</form>					
+{% endblock search %}
+{% block content %}
+	<div class="section">
+		<div class="container">			
+			<div class="row">
+				<div class="col-sm-3">
+						<!-- for auto writting section -->
+					<h3 style="color: green;"><span class="typed"></span></h3>
+				</div>
+			</div>	
+			<!-- Product Single -->
+			{% for p in all_data %}
+
+				<div class="col-md-3 col-sm-6 col-xs-6">
+					<div class="product product-single">
+						<div class="product-thumb">
+							<a href="/product/{{p.id}}" class="main-btn quick-view"><i class="fa fa-search-plus"></i> Quick view</a>
+							<img src="{{ p.image.url }}" alt="" style="height: 200px;">
+						</div>
+						<div class="product-body">
+							<h3 class="product-price">৳ {{ p.price }}</h3>
+							<div class="product-rating">
+								<i class="fa fa-star{% if p.avaregereview < 1%}-o empty{% endif%}"></i>
+								<i class="fa fa-star{% if p.avaregereview < 2%}-o empty{% endif%}"></i>
+								<i class="fa fa-star{% if p.avaregereview < 3%}-o empty{% endif%}"></i>
+								<i class="fa fa-star{% if p.avaregereview < 4%}-o empty{% endif%}"></i>
+								<i class="fa fa-star{% if p.avaregereview < 5%}-o empty{% endif%}"></i>
+							</div>
+							<h2 class="product-name"><a href="/product/{{p.id}}">{{ p.title }}</a></h2>
+							<div class="product-btns">
+								<!-- <button class="main-btn icon-btn"><i class="fa fa-heart"></i></button>
+								<button class="main-btn icon-btn"><i class="fa fa-exchange"></i></button> -->
+								<a href="/addtoshopcart/{{p.id}}" class="primary-btn add-to-cart"><i class="fa fa-shopping-cart"></i> Add to Cart</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			<!-- /Product Single -->
+			{% endfor %}
+
+		<div class="row">
+			<div class="col-sm-3">
+					
+			</div>
+		</div>	
+			<!-- store bottom filter -->
+			<div class="container-fluid ">
+				<div class="pagination">
+					<span class="step-links">
+						{% if all_data.has_previous %}
+							<a href="?page=1">&laquo; first</a>
+							<a href="?page={{ all_data.previous_page_number }}">previous</a>
+						{% endif %}
+				
+						<span class="current">
+							Page {{ all_data.number }} of {{ all_data.paginator.num_pages }}.
+						</span>
+				
+						{% if all_data.has_next %}
+							<a href="?page={{ all_data.next_page_number }}">next</a>
+							<a href="?page={{ all_data.paginator.num_pages }}">last &raquo;</a>
+						{% endif %}
+					</span>
+				</div>
+			</div>
+			<!-- /store bottom filter -->
+		</div>
+    
+{% endblock %}
+
+{% block jquery %}
+		<script >
+			var typed = new Typed('.typed', {
+				strings:[
+					"Everything for you!",
+					"Happy shopping."
+				],
+				typeSpeed: 100,
+				backSpeed: 0,
+				smartBackspace: true, // this is a default
+				loop: true
+			  });
+		</script>
+	{% endblock jquery %}
+	
+	
