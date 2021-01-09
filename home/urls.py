@@ -18,5 +18,6 @@ urlpatterns = [
     path('men/',views.men, name = "men"),
     path('user_profile/',views.user_profile, name="user_profile"),
     path('user_update/',views.user_update, name = "user_update"),
-    path('user_profile/user_orders',views.user_orders, name = "user_orders")
+    path('user_profile/user_orders',views.user_orders, name = "user_orders"),
+    path('faq/',views.faq, name = "faq"),
 ]

@@ -3,7 +3,7 @@ from django.http import JsonResponse
 from django.http import HttpResponse, HttpResponseRedirect
 from product.models import Product, Comment,ProductCategories
 from order.models import ShopCart
-from .models import Setting,ContactMessage
+from .models import Setting,ContactMessage,FAQ
 from django.contrib import messages
 from user.models import UserProfile
 from order.models import Order, OrderProduct
@@ -476,3 +476,24 @@ def user_orders(request):
         'orders': orders,
     }
     return render(request,"user_orders.html",context=context)
+
+
+def faq(request):
+    current_user = request.user
+    shopcart = ShopCart.objects.filter(user_id = current_user.id)
+    total = 0
+    q = 0
+    for s in shopcart:
+        total += s.product.price * s.quantity
+        q += s.quantity
+    setting = Setting.objects.all()
+    catagories = ProductCategories.objects.all()
+    faq = FAQ.objects.filter(status="True").order_by("ordernumber")
+    context = {
+        "catagories":catagories,
+        "setting":setting,
+        'total':total,
+        'q':q,
+        'faq': faq,
+    }
+    return render(request,"faq.html",context=context)

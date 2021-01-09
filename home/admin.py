@@ -2,7 +2,7 @@ from django.contrib import admin
 
 from product.models import Product,Comment, ProductCategories
 from order.models import ShopCart, Order, OrderProduct
-from home.models import Setting, ContactMessage
+from home.models import Setting, ContactMessage,FAQ
 from user.models import UserProfile
 
 # Register your models here.
@@ -25,6 +25,7 @@ admin.site.register(Setting,SettingAdmin)
 admin.site.register(ContactMessage)
 admin.site.register(UserProfile)
 admin.site.register(Comment)
+admin.site.register(FAQ)
 
 
 #start from here https://www.youtube.com/watch?v=OvTs8BMLb7o&list=PLIUezwWmVtFXaHcJ63ZM6uOJdhMrnZFFk&index=17
