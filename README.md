@@ -8,7 +8,7 @@ eCommerce Project Features Listing
     User can add review for the product
     Search all the products using filters
     Add products in cart
-    User can checkout product
+    User can checkout product.
 
 ## Home
 ![Home](https://user-images.githubusercontent.com/28469673/104103617-4a1b2b80-52cd-11eb-9248-034b4cf8e9f0.JPG)
